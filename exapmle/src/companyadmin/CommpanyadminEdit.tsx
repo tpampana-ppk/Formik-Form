@@ -1,32 +1,29 @@
+import { ChangeEvent, useState } from "react";
 import MyForm from "./CompanyadminForm";
-interface FormValues {
-    _id:string;
-  firstname: string;
-  middlename: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
 
 const CompanyadminEdit = () => {
-  const initialValues: FormValues = {
-    _id:"1",
-    firstname: "fname",
-    middlename: "mname",
-    lastname: "lname",
-    email: "a@gmail.com",
-    password: "123",
-    confirmPassword: "123",
+  const initialValues = {
+    username: "bbb",
+    password: "bbb",
+    roles: [
+      { id: "1", name: "Admin" },
+      { id: "2", name: "User" },
+    ],
   };
+  const [formData, setFormData] = useState(initialValues);
 
+  const handleChange = (event:ChangeEvent<HTMLInputElement>) =>{
+    setFormData((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  }
   const handleSubmit = (values: any) => {
     console.log(values);
   };
-
   return (
     <div>
-      <MyForm formData={initialValues} onInputSubmit={handleSubmit} />
+      <MyForm formData={formData} onInputSubmit={handleSubmit} onInputChange={handleChange}/>
     </div>
   );
 };

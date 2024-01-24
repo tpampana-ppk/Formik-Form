@@ -1,30 +1,34 @@
-import MyForm from "./CompanyadminForm";
-interface FormValues {
-  firstname: string;
-  middlename: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import { ChangeEvent, useState } from "react";
+import MyForm from "./CompanyadminForm"
+
 
 const CompanyadminAdd = () => {
-  const initialValues: FormValues = {
-    firstname: "",
-    middlename: "",
-    lastname: "",
-    email: "",
+  const initialValues = {
+    username: "",
     password: "",
-    confirmPassword: "",
+    roles: [],
   };
-  const handleSubmit = (values: FormValues) => {
+  const [formData,setFormData]=useState(initialValues)
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
+  const handleSubmit = (values:any) =>{
     console.log(values);
-  };
+    
+  }
   return (
     <div>
-      <MyForm formData={initialValues} onInputSubmit={handleSubmit} />
+      <MyForm
+        formData={formData}
+        onInputSubmit={handleSubmit}
+        onInputChange={handleChange}
+      />
     </div>
   );
-};
+}
 
-export default CompanyadminAdd;
+export default CompanyadminAdd
