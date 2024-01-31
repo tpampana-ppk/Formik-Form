@@ -1,10 +1,11 @@
-import AddForm from "./companyadmin/AddForm";
+import CompanyAdminAdd from "./companyadmin/AddForm";
+
 
 
 const App = () => {
   return (
     <div>
-      <AddForm />
+      <CompanyAdminAdd />
     </div>
   );
 }

@@ -1,20 +1,40 @@
-import SimpleForm from "./BasicForm"
+import * as yup from "yup";
+import { AdminFormData } from "../types";
+import CompanyAdminForm from "./BasicForm";
+import * as validation from "../Validation/validation";
 
+const validationSchema = yup.object({
+  firstname: validation.firstname,
+  lastname: validation.lastname,
+  email: validation.email,
+  password: validation.password,
+});
 
-const AddForm = () => {
-   const formData = {
-     firstName: "",
-     lastName: "",
-     email: "",
-     password: "",
-     confirmPassword: "",
-     countries: [],
-   };
+const CompanyAdminAdd = () => {
+  const initialData: AdminFormData = {
+    firstname: "",
+    lastname: "",
+    email: "",
+    selectedOption: { id: "", name: "" },
+    acceptTerms:false,
+    password: "",
+  };
+
+  const handleSubmit = async (values: AdminFormData) => {
+    console.log(values);
+    
+  };
+
   return (
     <div>
-      <SimpleForm formData={formData}/>
+      <CompanyAdminForm
+        formData={initialData}
+        label={"Add"}
+        validationSchema={validationSchema}
+        onDataSubmit={handleSubmit}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default AddForm
+export default CompanyAdminAdd;

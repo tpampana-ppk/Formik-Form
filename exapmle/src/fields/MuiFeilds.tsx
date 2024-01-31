@@ -1,22 +1,18 @@
 import React from "react";
 import { TextField, TextFieldProps } from "@mui/material";
 
-interface MuiFieldsProps {
+interface CustomInputTextFieldprops {
   formik: any;
   fieldname: string;
   label: string;
-  fieldtype:string;
+  fieldtype: string;
 }
 
-const MuiFields: React.FC<MuiFieldsProps & TextFieldProps> = ({
-  formik,
-  fieldname,
-  label,
-  fieldtype,
-  ...props
-}) => {
+const CustomInputTextField: React.FC<
+  CustomInputTextFieldprops & TextFieldProps
+> = ({ formik, fieldname, label, fieldtype }) => {
   return (
-    <div>
+    <>
       <TextField
         label={label}
         variant="outlined"
@@ -25,7 +21,7 @@ const MuiFields: React.FC<MuiFieldsProps & TextFieldProps> = ({
         name={fieldname}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values[fieldname]}
+        value={formik.values[fieldname].trim()}
         fullWidth
         margin="normal"
         helperText={
@@ -34,10 +30,9 @@ const MuiFields: React.FC<MuiFieldsProps & TextFieldProps> = ({
             : ""
         }
         error={formik.touched[fieldname] && Boolean(formik.errors[fieldname])}
-        {...props}
       />
-    </div> 
+    </>
   );
 };
 
-export default MuiFields;
+export default CustomInputTextField;
